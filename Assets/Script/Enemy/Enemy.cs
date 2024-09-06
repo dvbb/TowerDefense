@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
+    public static Action OnEndReached;
+
     [SerializeField] protected float moveSpeed = 3f;
     [SerializeField] protected Waypoint waypoint;
 
@@ -46,6 +50,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void ReturnEnemyToPool()
     {
+        if (OnEndReached != null)
+            OnEndReached.Invoke();
         ObjectPooler.ReturnToPool(gameObject);
     }
 }
