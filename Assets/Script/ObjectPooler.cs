@@ -45,4 +45,9 @@ public class ObjectPooler : MonoBehaviour
         newInstance.SetActive(false);
         return newInstance;
     }
+
+    public static void ReturnToPool(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
+    }
 }
