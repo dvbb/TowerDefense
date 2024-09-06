@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
     public static Action OnEndReached;
 
     [SerializeField] protected float moveSpeed = 3f;
-    [SerializeField] protected Waypoint waypoint;
+
+    public Waypoint Waypoint { get; set; }
 
     protected int _currentWaypointIndex = 0;
     protected Vector3 _currentPosition;
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _currentWaypointIndex = 0;
-        _currentPosition = waypoint.GetWaypointPosition(_currentWaypointIndex);
+        _currentPosition = Waypoint.GetWaypointPosition(_currentWaypointIndex);
     }
 
     // Update is called once per frame
@@ -33,17 +34,19 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Move()
     {
-        if (_currentWaypointIndex == waypoint.Pointes.Length)
+        if (_currentWaypointIndex == Waypoint.Pointes.Length)
         {
+            //reset enemy parameters
+            gameObject.transform.position = Waypoint.Pointes[0];
+            _currentWaypointIndex = 0;
+
             ReturnEnemyToPool();
             return;
         }
-        _currentPosition = waypoint.GetWaypointPosition(_currentWaypointIndex); 
+        _currentPosition = Waypoint.GetWaypointPosition(_currentWaypointIndex); 
         transform.position = Vector3.MoveTowards(transform.position, _currentPosition, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, _currentPosition) < .1f && _currentWaypointIndex < waypoint.Pointes.Length)
+        if (Vector3.Distance(transform.position, _currentPosition) < .1f && _currentWaypointIndex < Waypoint.Pointes.Length)
         {
-            Debug.Log(_currentWaypointIndex);
-            Debug.Log("waypoint.Pointes.Length:" + waypoint.Pointes.Length);
             _currentWaypointIndex++;
         }
     }
