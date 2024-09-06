@@ -24,6 +24,12 @@ public class Spawner : MonoBehaviour
 
     private float _spawnTimer;
     private int _enemiesSpawned;
+    private ObjectPooler _pooler;
+
+    private void Awake()
+    {
+        _pooler = GetComponent<ObjectPooler>();
+    }
 
     private void Update()
     {
@@ -55,6 +61,10 @@ public class Spawner : MonoBehaviour
         }
         return time;
     }
-    private void SpawnEnemy() => Instantiate(enemy, transform.position, Quaternion.identity);
+    private void SpawnEnemy()
+    {
+        GameObject newObject = _pooler.GetInstanceFromPool();
+        newObject.SetActive(true);
+    }
     private float GetRandomDelay() => Random.Range(minRandomDelay, maxRandomDelay);
 }
