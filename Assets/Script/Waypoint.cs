@@ -9,6 +9,9 @@ public class Waypoint : MonoBehaviour
     private Vector3 _currentPosition;
     private bool _gameStarted;
 
+    public Vector3[] Pointes => points;
+    public Vector3 CurrentPosition => _currentPosition;
+
     private void Start()
     {
         _gameStarted = true;
@@ -31,7 +34,7 @@ public class Waypoint : MonoBehaviour
             {
 
                 Gizmos.color = Color.gray;
-                Gizmos.DrawLine(points[i]+ _currentPosition, points[i + 1]+ _currentPosition);
+                Gizmos.DrawLine(points[i] + _currentPosition, points[i + 1] + _currentPosition);
             }
         }
     }
