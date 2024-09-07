@@ -23,10 +23,8 @@ public class ObjectPooler : MonoBehaviour
     {
         for (int i = 0; i < _pool.Count; i++)
         {
-            Debug.Log(i + "   " + _pool[i].activeInHierarchy);
             if (!_pool[i].activeInHierarchy)
             {
-                Debug.Log(i + "   " + !_pool[i].activeInHierarchy + "returned!");
                 return _pool[i];
             }
         }

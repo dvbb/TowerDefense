@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,53 +9,86 @@ public class Enemy : MonoBehaviour
 {
     public static Action OnEndReached;
 
-    [SerializeField] protected float moveSpeed = 3f;
+    [Header("Basic info")]
+    [SerializeField] public float moveSpeed = 3f;
+    [SerializeField] public float maxHealth;
+    public float currentHealth;
 
     public Waypoint Waypoint { get; set; }
 
-    protected int _currentWaypointIndex = 0;
-    protected Vector3 _currentPosition;
+    public int currentWaypointIndex = 0;
+    public Vector3 currentPosition;
+
+    #region Components
+    public Animator Anim { get; private set; }
+    public EntityFx fx { get; private set; }
+    public SpriteRenderer sr { get; private set; }
+    #endregion
+
+    #region States
+    public EnemyStateMachine StateMachine;
+    public EnemyMoveState moveState { get; private set; }
+    public EnemyHurtState hurtState { get; private set; }
+    public EnemyDieState dieState { get; private set; }
+    #endregion
 
     protected virtual void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();
+        Anim = GetComponent<Animator>();
+
+        StateMachine = new EnemyStateMachine();
+        moveState = new EnemyMoveState(this, StateMachine, "Move");
+        hurtState = new EnemyHurtState(this, StateMachine, "Hurt");
+        dieState = new EnemyDieState(this, StateMachine, "Die");
 
     }
 
     protected virtual void Start()
     {
-        _currentWaypointIndex = 0;
-        _currentPosition = Waypoint.GetWaypointPosition(_currentWaypointIndex);
+        //fx = GetComponent<EntityFx>();
+
+        ResetEnemy();
+        StateMachine.Initialize(moveState);
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
-        Move();
+        StateMachine.currentState.Update();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TakeDemage(5);
+        }
     }
 
-    protected virtual void Move()
+    public void ResetEnemy()
     {
-        if (_currentWaypointIndex == Waypoint.Pointes.Length)
-        {
-            //reset enemy parameters
-            gameObject.transform.position = Waypoint.Pointes[0];
-            _currentWaypointIndex = 0;
-
-            ReturnEnemyToPool();
-            return;
-        }
-        _currentPosition = Waypoint.GetWaypointPosition(_currentWaypointIndex); 
-        transform.position = Vector3.MoveTowards(transform.position, _currentPosition, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, _currentPosition) < .1f && _currentWaypointIndex < Waypoint.Pointes.Length)
-        {
-            _currentWaypointIndex++;
-        }
+        currentWaypointIndex = 0;
+        currentPosition = Waypoint.GetWaypointPosition(currentWaypointIndex);
+        currentHealth = maxHealth;
+        gameObject.transform.position = Waypoint.Pointes[0];
     }
 
-    protected virtual void ReturnEnemyToPool()
+    public virtual void TakeDemage(float demage)
+    {
+        currentHealth -= demage;
+        StateMachine.ChangeState(hurtState);
+        if (currentHealth < 0)
+            StateMachine.ChangeState(dieState);
+    }
+
+    public virtual void Die()
+    {
+
+    }
+
+    public virtual void ReturnEnemyToPool()
     {
         if (OnEndReached != null)
             OnEndReached.Invoke();
         ObjectPooler.ReturnToPool(gameObject);
     }
+    public virtual void AnimationFinishTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
+
 }
