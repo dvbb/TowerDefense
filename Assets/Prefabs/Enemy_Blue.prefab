@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6946171836570936722}
   - component: {fileID: 717736767480403641}
   - component: {fileID: 5030639142198593592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 88389739595709816}
   - component: {fileID: 5603569661889107196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 6677721548529608315}
   - component: {fileID: 1322668233781092378}
   - component: {fileID: 785087014384625827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,9 +252,10 @@ GameObject:
   - component: {fileID: 557359250145560133}
   - component: {fileID: 3589759337937981352}
   - component: {fileID: 538525422533236365}
-  m_Layer: 0
+  - component: {fileID: -5904073424192922489}
+  m_Layer: 6
   m_Name: Enemy_Blue
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,8 +364,9 @@ MonoBehaviour:
   moveSpeed: 3
   maxHealth: 20
   currentHealth: 20
-  currentWaypointIndex: 0
+  nextWaypointIndex: 0
   currentPosition: {x: 0, y: 0, z: 0}
+  facingDir: 1
 --- !u!114 &538525422533236365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +379,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c04f8c7351b5df449e7f5134abc4ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &-5904073424192922489
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6364950509782358295}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 3, y: 5}
+  m_Direction: 0
 --- !u!1 &8235597864409154643
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8576169402859044618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +463,7 @@ GameObject:
   - component: {fileID: 2253626692752208716}
   - component: {fileID: 2962500349684604866}
   - component: {fileID: 1291767572435569057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

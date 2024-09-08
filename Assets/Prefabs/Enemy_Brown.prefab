@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2211240096405106195}
   m_Layer: 0
   m_Name: Enemy_Brown
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,4 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  waypoint: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  nextWaypointIndex: 0
+  currentPosition: {x: 0, y: 0, z: 0}
+  facingDir: 1
