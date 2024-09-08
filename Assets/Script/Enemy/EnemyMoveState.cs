@@ -8,6 +8,9 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyMoveState : EnemyState
 {
+    private Vector3 from;
+    private Vector3 to;
+
     public EnemyMoveState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -30,17 +33,23 @@ public class EnemyMoveState : EnemyState
     public override void Update()
     {
         base.Update();
-        if (enemy.currentWaypointIndex == enemy.Waypoint.Pointes.Length)
+        if (enemy.nextWaypointIndex == enemy.Waypoint.Pointes.Length)
         {
             enemy.ResetEnemy();
             enemy.ReturnEnemyToPool();
             return;
         }
-        enemy.currentPosition = enemy.Waypoint.GetWaypointPosition(enemy.currentWaypointIndex);
-        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, enemy.currentPosition, enemy.moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(enemy.transform.position, enemy.currentPosition) < .1f && enemy.currentWaypointIndex < enemy.Waypoint.Pointes.Length)
+        to = enemy.Waypoint.GetWaypointPosition(enemy.nextWaypointIndex);
+
+        if (enemy.transform.position.x > to.x && enemy.facingDir == 1)
+            enemy.Flip();
+        else if (enemy.transform.position.x < to.x && enemy.facingDir == -1)
+            enemy.Flip();
+
+        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, to, enemy.moveSpeed * Time.deltaTime);
+        if (Vector3.Distance(enemy.transform.position, to) < .1f && enemy.nextWaypointIndex < enemy.Waypoint.Pointes.Length)
         {
-            enemy.currentWaypointIndex++;
+            enemy.nextWaypointIndex++;
         }
     }
 }

@@ -21,5 +21,6 @@ public class Enemy_AnimationTrigger : MonoBehaviour
     private IEnumerator DeadAnimationTrigger()
     {
         yield return new WaitForSeconds(.1f);
+        enemy.ReturnEnemyToPool();
     }
 }

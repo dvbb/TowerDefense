@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class Enemy : MonoBehaviour
 
     public Waypoint Waypoint { get; set; }
 
-    public int currentWaypointIndex = 0;
+    public int nextWaypointIndex = 0;
     public Vector3 currentPosition;
+    public float facingDir = 1;
 
     #region Components
     public Animator Anim { get; private set; }
@@ -64,8 +66,8 @@ public class Enemy : MonoBehaviour
 
     public void ResetEnemy()
     {
-        currentWaypointIndex = 0;
-        currentPosition = Waypoint.GetWaypointPosition(currentWaypointIndex);
+        nextWaypointIndex = 0;
+        currentPosition = Waypoint.GetWaypointPosition(nextWaypointIndex);
         currentHealth = maxHealth;
         gameObject.transform.position = Waypoint.Pointes[0];
     }
@@ -74,13 +76,16 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= demage;
         StateMachine.ChangeState(hurtState);
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
+        {
+            Debug.Log(currentHealth);
             StateMachine.ChangeState(dieState);
+        }
     }
 
     public virtual void Die()
     {
-
+        ReturnEnemyToPool();
     }
 
     public virtual void ReturnEnemyToPool()
@@ -89,6 +94,12 @@ public class Enemy : MonoBehaviour
             OnEndReached.Invoke();
         ObjectPooler.ReturnToPool(gameObject);
     }
-    public virtual void AnimationFinishTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
 
+    public virtual void Flip()
+    {
+        sr.flipX = sr.flipX ? false : true;
+        facingDir *= -1;
+    }
+
+    public virtual void AnimationFinishTrigger() => StateMachine.currentState.AnimatorFinishTrigger();
 }

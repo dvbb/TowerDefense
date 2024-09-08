@@ -26,7 +26,6 @@ public class EnemyState
     public virtual void Enter()
     {
         triggerCalled = false;
-        Debug.Log(animBoolName);
         enemy.Anim.SetBool(animBoolName, true);
     }
 
