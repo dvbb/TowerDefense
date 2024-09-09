@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 {
     public static Action OnEndReached;
 
+    [SerializeField] public Transform demageTextPosition;
+
     [Header("Basic info")]
     [SerializeField] public float moveSpeed = 3f;
     [SerializeField] public float maxHealth;
@@ -75,10 +77,10 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDemage(float demage)
     {
         currentHealth -= demage;
+        Bullet.OnEnemyHit?.Invoke(demageTextPosition, demage);
         StateMachine.ChangeState(hurtState);
         if (currentHealth <= 0)
         {
-            Debug.Log(currentHealth);
             StateMachine.ChangeState(dieState);
         }
     }

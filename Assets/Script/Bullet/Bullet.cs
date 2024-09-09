@@ -7,8 +7,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Bullet : MonoBehaviour
 {
+    public static Action<Transform, float> OnEnemyHit;
+
     [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float demage = 10;
+    [SerializeField] private float damage = 10;
 
     public Enemy Target { get; private set; }
 
@@ -27,7 +29,7 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, Target.transform.position) < .1)
         {
-            Target.TakeDemage(demage);
+            Target.TakeDemage(damage);
             ObjectPooler.ReturnToPool(gameObject);
             RestBullet();
         }
@@ -42,6 +44,5 @@ public class Bullet : MonoBehaviour
     {
         transform.localEulerAngles = Vector3.zero;
         canMove = false;
-        Debug.Log("reset  " + transform.rotation);
     }
 }

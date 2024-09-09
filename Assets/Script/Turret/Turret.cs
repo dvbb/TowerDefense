@@ -44,10 +44,6 @@ public class Turret : MonoBehaviour
     {
         Vector3 targetPosition = enemy.transform.position - transform.position;
         float angle = Vector3.SignedAngle(transform.up, targetPosition, transform.forward);
-        Debug.Log("targetPosition:  " + targetPosition);
-        Debug.Log("angle:  " + angle);
-        //if (angle < 0)
-        //    return -angle;
         return angle; 
     }
 
@@ -86,7 +82,6 @@ public class Turret : MonoBehaviour
         bullet.canMove = true;
         bullet.transform.Rotate(0, 0, 0);
         bullet.transform.Rotate(0, 0, GetRotateAngle(EnemyTargets.First()));
-        Debug.Log(bullet.transform.rotation);
 
         newInstance.SetActive(true);
     }
