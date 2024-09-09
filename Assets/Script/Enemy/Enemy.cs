@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float moveSpeed = 3f;
     [SerializeField] public float maxHealth;
     public float currentHealth;
+    [SerializeField] public int fallingCoin = 5;
 
     public Waypoint Waypoint { get; set; }
 

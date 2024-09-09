@@ -18,6 +18,7 @@ public class EnemyDieState : EnemyState
 
     public override void Enter()
     {
+        CurrencySystem.instance.AddCoins(enemy.fallingCoin);
         base.Enter();
     }
 
