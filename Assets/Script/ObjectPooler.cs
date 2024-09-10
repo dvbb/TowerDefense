@@ -29,7 +29,8 @@ public class ObjectPooler : MonoBehaviour
                 return _pool[i];
             }
         }
-        return CreateInstance();
+        ExpendPool();
+        return GetInstanceFromPool();
     }
     private void CreatePooler()
     {
@@ -50,5 +51,14 @@ public class ObjectPooler : MonoBehaviour
     public static void ReturnToPool(GameObject gameObject)
     {
         gameObject.SetActive(false);
+    }
+
+    private void ExpendPool()
+    {
+        poolSize += 10;
+        for (int i = 0; i < 10; i++)
+        {
+            _pool.Add(CreateInstance());
+        }
     }
 }

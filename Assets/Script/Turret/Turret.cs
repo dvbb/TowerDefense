@@ -55,13 +55,18 @@ public class Turret : MonoBehaviour
 
         Enemy target = EnemyTargets.First();
         float distance = target.distanceToNextPoint;
+        int flag = -1;
         for (int i = 0; i < EnemyTargets.Count; i++)
         {
+            //Debug.Log("i  " + i +  "  "  + EnemyTargets[i].distanceToNextPoint);
             if (EnemyTargets[i].distanceToNextPoint <= distance)
             {
+                flag = i;
                 target = EnemyTargets[i];
+                distance = EnemyTargets[i].distanceToNextPoint;
             }
         }
+        Debug.Log(flag);
 
         bullet.InitBullet(target);
         bullet.canMove = true;
