@@ -18,12 +18,13 @@ public class EnemyDieState : EnemyState
 
     public override void Enter()
     {
-        CurrencySystem.instance.AddCoins(enemy.fallingCoin);
         base.Enter();
     }
 
     public override void Exit()
     {
+        CurrencySystem.instance.AddCoins(enemy.fallingCoin);
+        enemy.Die();
         base.Exit();
     }
 

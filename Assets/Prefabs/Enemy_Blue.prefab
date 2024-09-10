@@ -302,7 +302,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5419154300859577425}
@@ -348,7 +348,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1178040249
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 72d3a1b45c61ae44f87972c05eb671e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -395,9 +395,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demageTextPosition: {fileID: 2033152591092778032}
-  moveSpeed: 3
+  moveSpeed: 5
   maxHealth: 20
   currentHealth: 20
+  fallingCoin: 5
   nextWaypointIndex: 0
   currentPosition: {x: 0, y: 0, z: 0}
   facingDir: 1

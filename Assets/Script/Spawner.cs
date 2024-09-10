@@ -71,9 +71,13 @@ public class Spawner : MonoBehaviour
     {
         GameObject newObject = _pooler.GetInstanceFromPool();
 
+        Debug.Log("SpawnEnemy");
         Enemy enemy = newObject.GetComponent<Enemy>();
+        if (enemy.moveState == null)
+            enemy.InitEnemyComponent();
         enemy.Waypoint = _waypoint;
-        enemy.transform.position = _waypoint.Pointes[0];
+        enemy.ResetEnemy();
+        //enemy.transform.position = _waypoint.Pointes[0] + _waypoint.CurrentPosition;
 
         newObject.SetActive(true);
     }

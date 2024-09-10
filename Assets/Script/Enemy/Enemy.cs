@@ -39,18 +39,13 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
-        Anim = GetComponent<Animator>();
-
-        StateMachine = new EnemyStateMachine();
-        moveState = new EnemyMoveState(this, StateMachine, "Move");
-        hurtState = new EnemyHurtState(this, StateMachine, "Hurt");
-        dieState = new EnemyDieState(this, StateMachine, "Die");
-
+        Debug.Log("enemy Awake");
+        InitEnemyComponent();
     }
 
     protected virtual void Start()
     {
+        Debug.Log("enemy Awake");
         //fx = GetComponent<EntityFx>();
 
         ResetEnemy();
@@ -69,10 +64,11 @@ public class Enemy : MonoBehaviour
 
     public void ResetEnemy()
     {
+        StateMachine.Initialize(moveState);
         nextWaypointIndex = 0;
         currentPosition = Waypoint.GetWaypointPosition(nextWaypointIndex);
         currentHealth = maxHealth;
-        gameObject.transform.position = Waypoint.Pointes[0];
+        gameObject.transform.position = Waypoint.Pointes[0] + Waypoint.CurrentPosition;
     }
 
     public virtual void TakeDemage(float demage)
@@ -84,6 +80,18 @@ public class Enemy : MonoBehaviour
         {
             StateMachine.ChangeState(dieState);
         }
+    }
+
+    public void InitEnemyComponent()
+    {
+        Debug.Log("InitEnemyComponent");
+        sr = GetComponent<SpriteRenderer>();
+        Anim = GetComponent<Animator>();
+
+        StateMachine = new EnemyStateMachine();
+        moveState = new EnemyMoveState(this, StateMachine, "Move");
+        hurtState = new EnemyHurtState(this, StateMachine, "Hurt");
+        dieState = new EnemyDieState(this, StateMachine, "Die");
     }
 
     public virtual void Die()
