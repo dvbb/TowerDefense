@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BarrackV1
   m_EditorClassIdentifier: 
   TurretPrefab: {fileID: 8466396132662308545, guid: f11bc9cd8972e2346b88e5a8895e1114, type: 3}
-  TurretShopCost: 50
-  TurretShopSprite: {fileID: 21300000, guid: 0a0b70cfd52e574419e377163923b946, type: 3}
+  TurretShopCost: 80
+  TurretShopSprite: {fileID: 21300000, guid: d57dcbd3f9564554da1784d3bd7b8205, type: 3}

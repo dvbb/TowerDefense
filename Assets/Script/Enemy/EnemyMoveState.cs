@@ -35,7 +35,6 @@ public class EnemyMoveState : EnemyState
         base.Update();
         if (enemy.nextWaypointIndex == enemy.Waypoint.Pointes.Length)
         {
-            enemy.ResetEnemy();
             enemy.ReturnEnemyToPool();
             return;
         }
@@ -47,7 +46,8 @@ public class EnemyMoveState : EnemyState
             enemy.Flip();
 
         enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, to, enemy.moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(enemy.transform.position, to) < .1f && enemy.nextWaypointIndex < enemy.Waypoint.Pointes.Length)
+        enemy.distanceToNextPoint = Vector3.Distance(enemy.transform.position, to);
+        if (enemy.distanceToNextPoint < .1f && enemy.nextWaypointIndex < enemy.Waypoint.Pointes.Length)
         {
             enemy.nextWaypointIndex++;
         }

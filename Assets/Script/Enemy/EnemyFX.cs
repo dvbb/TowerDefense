@@ -12,7 +12,7 @@ public class EnemyFX : MonoBehaviour
         TextMeshProUGUI demageText = newInstance.GetComponent<UI_DamageText>().text;
         demageText.text = demage.ToString();
 
-        newInstance.transform.SetParent(textSpawnPosition);
+        //newInstance.transform.SetParent(textSpawnPosition);
         newInstance.transform.position = textSpawnPosition.position;
         newInstance.SetActive(true);
     }

@@ -14,7 +14,7 @@ public class UI_DamageText : MonoBehaviour
 
     public void ReturnToPool()
     {
-        transform.SetParent(null);
+        //transform.SetParent(null);
         ObjectPooler.ReturnToPool(gameObject);
     }
 

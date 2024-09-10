@@ -395,8 +395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demageTextPosition: {fileID: 2033152591092778032}
+  defaultSpeed: 3
   moveSpeed: 5
-  maxHealth: 20
+  maxHealth: 50
   currentHealth: 20
   fallingCoin: 5
   nextWaypointIndex: 0

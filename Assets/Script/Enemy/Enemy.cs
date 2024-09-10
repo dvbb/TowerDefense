@@ -13,16 +13,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] public Transform demageTextPosition;
 
     [Header("Basic info")]
-    [SerializeField] public float moveSpeed = 3f;
+    [SerializeField] protected float defaultSpeed = 3f;
+    public float moveSpeed;
     [SerializeField] public float maxHealth;
     public float currentHealth;
     [SerializeField] public int fallingCoin = 5;
 
     public Waypoint Waypoint { get; set; }
 
+    protected float statTimer;
     public int nextWaypointIndex = 0;
     public Vector3 currentPosition;
     public float facingDir = 1;
+    public float distanceToNextPoint;
 
     #region Components
     public Animator Anim { get; private set; }
@@ -54,6 +57,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        statTimer-= Time.deltaTime;
+        if (statTimer < 0)
+            DisableSlowStats();
+
         StateMachine.currentState.Update();
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -69,6 +76,7 @@ public class Enemy : MonoBehaviour
         currentPosition = Waypoint.GetWaypointPosition(nextWaypointIndex);
         currentHealth = maxHealth;
         gameObject.transform.position = Waypoint.Pointes[0] + Waypoint.CurrentPosition;
+        DisableSlowStats();
     }
 
     public virtual void TakeDemage(float demage)
@@ -92,6 +100,8 @@ public class Enemy : MonoBehaviour
         moveState = new EnemyMoveState(this, StateMachine, "Move");
         hurtState = new EnemyHurtState(this, StateMachine, "Hurt");
         dieState = new EnemyDieState(this, StateMachine, "Die");
+
+        moveSpeed = defaultSpeed;
     }
 
     public virtual void Die()
@@ -110,6 +120,21 @@ public class Enemy : MonoBehaviour
     {
         sr.flipX = sr.flipX ? false : true;
         facingDir *= -1;
+    }
+
+    public virtual void EnableSlowStats()
+    {
+        Anim.speed = .5f;
+        moveSpeed *= .5f;
+        sr.color = Color.blue;
+        statTimer = 2f;
+    }
+
+    public virtual void DisableSlowStats()
+    {
+        Anim.speed = 1;
+        moveSpeed = defaultSpeed;
+        sr.color = Color.white;
     }
 
     public virtual void AnimationFinishTrigger() => StateMachine.currentState.AnimatorFinishTrigger();

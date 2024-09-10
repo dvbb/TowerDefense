@@ -13,7 +13,7 @@ public class TurretShopManager : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i < turrets.Length; i++)
-            CreateTurretCard(turrets[i]);
+            CreateTurretCard(turrets[i]); 
     }
 
     private void CreateTurretCard(TurretSettings settings)

@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class EnemyBlue : Enemy
+public class Turret_Archer : Turret
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void Start()
     {
         base.Start();
-        moveSpeed = 4f;
     }
 
     protected override void Update()
