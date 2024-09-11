@@ -71,7 +71,6 @@ public class Spawner : MonoBehaviour
     {
         GameObject newObject = _pooler.GetInstanceFromPool();
 
-        Debug.Log("SpawnEnemy");
         Enemy enemy = newObject.GetComponent<Enemy>();
         if (enemy.moveState == null)
             enemy.InitEnemyComponent();

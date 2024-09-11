@@ -42,13 +42,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Debug.Log("enemy Awake");
         InitEnemyComponent();
     }
 
     protected virtual void Start()
     {
-        Debug.Log("enemy Awake");
         //fx = GetComponent<EntityFx>();
 
         ResetEnemy();
@@ -92,7 +90,6 @@ public class Enemy : MonoBehaviour
 
     public void InitEnemyComponent()
     {
-        Debug.Log("InitEnemyComponent");
         sr = GetComponent<SpriteRenderer>();
         Anim = GetComponent<Animator>();
 

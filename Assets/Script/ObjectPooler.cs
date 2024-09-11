@@ -13,7 +13,6 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("pooler Awake");
         _pool = new List<GameObject>();
         _poolContainer = new GameObject($"Pool-{prefab.name}");
 

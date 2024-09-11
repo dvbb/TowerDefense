@@ -66,7 +66,6 @@ public class Turret : MonoBehaviour
                 distance = EnemyTargets[i].distanceToNextPoint;
             }
         }
-        Debug.Log(flag);
 
         bullet.InitBullet(target);
         bullet.canMove = true;

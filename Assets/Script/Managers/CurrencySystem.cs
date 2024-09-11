@@ -19,7 +19,10 @@ public class CurrencySystem : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("start: " + coinTest);
+        AddCoins(coinTest);
         LoadCoins();
+        Debug.Log("start end: " + TotalCoins);
     }
 
     private void LoadCoins()
@@ -30,7 +33,7 @@ public class CurrencySystem : MonoBehaviour
     public void AddCoins(int amount)
     {
         TotalCoins += amount;
-        PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, amount);
+        PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, TotalCoins);
         PlayerPrefs.Save();
     }
 
@@ -39,7 +42,7 @@ public class CurrencySystem : MonoBehaviour
         if (TotalCoins >= amount)
         {
             TotalCoins -= amount;
-            PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, amount);
+            PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, TotalCoins);
             PlayerPrefs.Save();
         }
     }
