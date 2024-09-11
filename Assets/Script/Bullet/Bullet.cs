@@ -47,9 +47,10 @@ public class Bullet : MonoBehaviour
     }
 
 
-    public void InitBullet(Enemy enemy)
+    public void InitBullet(Enemy enemy, float damage)
     {
         Target = enemy;
+        this.damage = damage;
     }
 
     public void RestBullet()

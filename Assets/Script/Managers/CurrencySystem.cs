@@ -6,10 +6,10 @@ public class CurrencySystem : MonoBehaviour
 {
     public static CurrencySystem instance;
 
-    [SerializeField] private int coinTest;
+    [SerializeField] private float cofloatest;
     private string CURRENCY_SAVE_KEY = "MYGAME_CURRENCY";
 
-    public int TotalCoins { get; private set; }
+    public float TotalCoins { get; private set; }
 
     private void Awake()
     {
@@ -19,30 +19,28 @@ public class CurrencySystem : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("start: " + coinTest);
-        AddCoins(coinTest);
+        AddCoins(cofloatest);
         LoadCoins();
-        Debug.Log("start end: " + TotalCoins);
     }
 
     private void LoadCoins()
     {
-        TotalCoins = PlayerPrefs.GetInt(CURRENCY_SAVE_KEY);
+        TotalCoins = PlayerPrefs.GetFloat(CURRENCY_SAVE_KEY);
     }
 
-    public void AddCoins(int amount)
+    public void AddCoins(float amount)
     {
         TotalCoins += amount;
-        PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, TotalCoins);
+        PlayerPrefs.SetFloat(CURRENCY_SAVE_KEY, TotalCoins);
         PlayerPrefs.Save();
     }
 
-    public void RemoveCoins(int amount)
+    public void RemoveCoins(float amount)
     {
         if (TotalCoins >= amount)
         {
             TotalCoins -= amount;
-            PlayerPrefs.SetInt(CURRENCY_SAVE_KEY, TotalCoins);
+            PlayerPrefs.SetFloat(CURRENCY_SAVE_KEY, TotalCoins);
             PlayerPrefs.Save();
         }
     }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eb0aa6324eaf849bb1c63b12053890, type: 3}
   m_Name: WizardV1
   m_EditorClassIdentifier: 
-  TurretPrefab: {fileID: 8466396132662308545, guid: f11bc9cd8972e2346b88e5a8895e1114, type: 3}
+  TurretPrefab: {fileID: 2568135863210515146, guid: 6d8096d90a1b4a9459135b7f07da9cd7, type: 3}
   TurretShopCost: 100
   TurretShopSprite: {fileID: 21300000, guid: 0528d4dc9102ed149af7e44771f55305, type: 3}

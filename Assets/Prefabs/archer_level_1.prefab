@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1886258951
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0a0b70cfd52e574419e377163923b946, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,6 +153,13 @@ MonoBehaviour:
   spawnPosition: {fileID: 8463496900942836912}
   coldDown: 1
   attackRange: 3
+  damage: 10
+  level: 1
+  upgradeAttackRange: 0.3
+  upgradeColdDown: 0.2
+  upgradeDamage: 5
+  totalValue: 50
+  upgradeCost: 50
 --- !u!50 &1366208899893299584
 Rigidbody2D:
   serializedVersion: 4
