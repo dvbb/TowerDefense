@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -43,6 +44,7 @@ public class Spawner : MonoBehaviour
         if (_spawnTimer < 0)
         {
             _spawnTimer = GetSpawnDelay();
+            Debug.Log("2  ");
             if (_enemiesSpawned < enemyCount)
             {
                 SpawnEnemy();
@@ -82,16 +84,26 @@ public class Spawner : MonoBehaviour
     }
     private float GetRandomDelay() => Random.Range(minRandomDelay, maxRandomDelay);
 
-
     private IEnumerator NextWave()
     {
+        Debug.Log("next wave");
         yield return new WaitForSeconds(delayBtwWaves);
+        UIManager.Instance.UpdateWaves();
         _enemiesRemaining = enemyCount;
         _spawnTimer = 0;
         _enemiesSpawned = 0;
     }
 
-    private void RecordEnemyEndReached()
+    private void EnemyReachFinalPoint()
+    {
+        _enemiesRemaining--;
+        if (_enemiesRemaining <= 0)
+        {
+            StartCoroutine("NextWave");
+        }
+    }
+
+    public void RecordDeadEnemy()
     {
         _enemiesRemaining--;
         if (_enemiesRemaining <= 0)
@@ -102,11 +114,13 @@ public class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        Enemy.OnEndReached += RecordEnemyEndReached;
+        Enemy.OnEndReached += EnemyReachFinalPoint;
+        Enemy.OnDeadBeforeReached += RecordDeadEnemy;
     }
 
     private void OnDisable()
     {
-        Enemy.OnEndReached -= RecordEnemyEndReached;
+        Enemy.OnEndReached -= EnemyReachFinalPoint;
+        Enemy.OnDeadBeforeReached -= RecordDeadEnemy;
     }
 }

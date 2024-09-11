@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private int lives = 10;
+    public static LevelManager instance;
 
-    public int totalLive { get; private set; }
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    public int lives = 10;
+
+    [SerializeField] private int totalLives;
 
     private void Start()
     {
-        totalLive = lives;
+        lives = totalLives;
+        UIManager.Instance.UpdateHealth();
     }
 
     private void ReduceLives()
     {
-        totalLive--;
-        if (totalLive <= 0)
+        lives--;
+        UIManager.Instance.UpdateHealth();
+        if (lives <= 0)
         {
             Debug.Log("Game over");
         }

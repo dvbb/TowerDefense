@@ -21,6 +21,7 @@ public class CurrencySystem : MonoBehaviour
     {
         AddCoins(cofloatest);
         LoadCoins();
+        UIManager.Instance.UpdateTotalCoins(TotalCoins);
     }
 
     private void LoadCoins()
@@ -33,6 +34,7 @@ public class CurrencySystem : MonoBehaviour
         TotalCoins += amount;
         PlayerPrefs.SetFloat(CURRENCY_SAVE_KEY, TotalCoins);
         PlayerPrefs.Save();
+        UIManager.Instance.UpdateTotalCoins(TotalCoins);
     }
 
     public void RemoveCoins(float amount)
@@ -42,6 +44,7 @@ public class CurrencySystem : MonoBehaviour
             TotalCoins -= amount;
             PlayerPrefs.SetFloat(CURRENCY_SAVE_KEY, TotalCoins);
             PlayerPrefs.Save();
+            UIManager.Instance.UpdateTotalCoins(TotalCoins);
         }
     }
 }

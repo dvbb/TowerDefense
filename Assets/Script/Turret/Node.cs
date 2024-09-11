@@ -4,7 +4,7 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
     public static Action<Node> OnNodeSelected;
-    public Turret Turret { get; private set; }
+    public Turret Turret { get; set; }
 
     public void SetTurret(Turret turret)
     {

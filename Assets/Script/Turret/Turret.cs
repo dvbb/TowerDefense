@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
 using static UnityEngine.GraphicsBuffer;
 
 public class Turret : MonoBehaviour
@@ -64,19 +65,22 @@ public class Turret : MonoBehaviour
 
         Bullet bullet = newInstance.GetComponent<Bullet>();
 
+        // Get target
         Enemy target = EnemyTargets.First();
         float distance = target.distanceToNextPoint;
         int flag = -1;
         for (int i = 0; i < EnemyTargets.Count; i++)
         {
             //Debug.Log("i  " + i +  "  "  + EnemyTargets[i].distanceToNextPoint);
-            if (EnemyTargets[i].distanceToNextPoint <= distance)
+            if (EnemyTargets[i].distanceToNextPoint <= distance && EnemyTargets[i].currentHealth > 0)
             {
                 flag = i;
                 target = EnemyTargets[i];
                 distance = EnemyTargets[i].distanceToNextPoint;
             }
         }
+        if (target.currentHealth <= 0)
+            return;
 
         bullet.InitBullet(target, GetDamage());
         bullet.canMove = true;
@@ -101,6 +105,7 @@ public class Turret : MonoBehaviour
     public void Sell()
     {
         CurrencySystem.instance.AddCoins(totalValue * .4f);
+        Destroy(gameObject);
     }
 
     public float GetDamage() => damage + (level - 1) * upgradeDamage;

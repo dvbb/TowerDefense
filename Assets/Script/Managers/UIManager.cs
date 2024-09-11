@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,7 +21,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeText;
     [SerializeField] private TextMeshProUGUI sellText;
     [SerializeField] private TextMeshProUGUI LevelText;
+    [SerializeField] private TextMeshProUGUI TotalCoins;
+    [SerializeField] private TextMeshProUGUI Waves;
+    [SerializeField] private TextMeshProUGUI Health;
 
+    private int _wave = 1;
     private Node _currentSelectedNode;
 
     #region Show/Close ui
@@ -39,6 +44,20 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region UnityButtonEvent
+    public void Upgrade()
+    {
+        _currentSelectedNode.Turret.Upgrage();
+        UpdateText();
+    }
+    public void SellTurret()
+    {
+        _currentSelectedNode.Turret.Sell();
+        _currentSelectedNode.Turret = null;
+        CloseNodeUiPanel();
+    }
+    #endregion
+
     private void NodeSelected(Node selectedNode)
     {
         Debug.Log(_currentSelectedNode?.Turret?.name);
@@ -53,18 +72,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Upgrade()
-    {
-        _currentSelectedNode.Turret.Upgrage();
-        UpdateText();
-    }
-
     public void UpdateText()
     {
-        LevelText.text = _currentSelectedNode.Turret.level.ToString();
+        LevelText.text = $"Level - {_currentSelectedNode.Turret.level.ToString()}";
         upgradeText.text = _currentSelectedNode.Turret.upgradeCost.ToString();
         sellText.text = (_currentSelectedNode.Turret.totalValue * .4f).ToString();
     }
+
+    public void UpdateTotalCoins(float coins)
+    {
+        TotalCoins.text = coins.ToString();
+    }
+
+    public void UpdateHealth() => Health.text = LevelManager.instance.lives.ToString();
+    public void UpdateWaves() => Waves.text = $"Wave {++_wave}";
+
 
     private void OnEnable()
     {

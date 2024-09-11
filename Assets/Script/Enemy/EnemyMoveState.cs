@@ -33,9 +33,11 @@ public class EnemyMoveState : EnemyState
     public override void Update()
     {
         base.Update();
+        if(enemy.currentHealth<=0)
+            enemy.StateMachine.ChangeState(enemy.dieState);
         if (enemy.nextWaypointIndex == enemy.Waypoint.Pointes.Length)
         {
-            enemy.ReturnEnemyToPool();
+            enemy.ReachFinalPosition();
             return;
         }
         to = enemy.Waypoint.GetWaypointPosition(enemy.nextWaypointIndex);

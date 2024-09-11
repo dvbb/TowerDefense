@@ -9,6 +9,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Enemy : MonoBehaviour
 {
     public static Action OnEndReached;
+    public static Action OnDeadBeforeReached;
 
     [SerializeField] public Transform demageTextPosition;
 
@@ -26,6 +27,8 @@ public class Enemy : MonoBehaviour
     public Vector3 currentPosition;
     public float facingDir = 1;
     public float distanceToNextPoint;
+
+    private bool isBusy;
 
     #region Components
     public Animator Anim { get; private set; }
@@ -55,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        statTimer-= Time.deltaTime;
+        statTimer -= Time.deltaTime;
         if (statTimer < 0)
             DisableSlowStats();
 
@@ -70,6 +73,7 @@ public class Enemy : MonoBehaviour
     public void ResetEnemy()
     {
         StateMachine.Initialize(moveState);
+        isBusy = false;
         nextWaypointIndex = 0;
         currentPosition = Waypoint.GetWaypointPosition(nextWaypointIndex);
         currentHealth = maxHealth;
@@ -81,9 +85,11 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= demage;
         Bullet.OnEnemyHit?.Invoke(demageTextPosition, demage);
-        StateMachine.ChangeState(hurtState);
-        if (currentHealth <= 0)
+        if (currentHealth > 0)
+            StateMachine.ChangeState(hurtState);
+        if (currentHealth <= 0 && !isBusy)
         {
+            isBusy = true;
             StateMachine.ChangeState(dieState);
         }
     }
@@ -103,13 +109,20 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        ReturnEnemyToPool();
+        ObjectPooler.ReturnToPool(gameObject);
+        Debug.Log("die");
+        if (OnDeadBeforeReached != null)
+        {
+            OnDeadBeforeReached.Invoke();
+        }
     }
 
-    public virtual void ReturnEnemyToPool()
+    public virtual void ReachFinalPosition()
     {
         if (OnEndReached != null)
+        {
             OnEndReached.Invoke();
+        }
         ObjectPooler.ReturnToPool(gameObject);
     }
 
