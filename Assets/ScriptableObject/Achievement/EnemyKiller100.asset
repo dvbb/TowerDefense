@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e342a24ad0cc804c994c9210bc92cdd, type: 3}
   m_Name: EnemyKiller100
   m_EditorClassIdentifier: 
-  Id: Killer20
+  Id: Killer100
   Title: Monster Killer
   ProgressToUnlock: 0
-  GoldReward: 200
+  GoldReward: 1000
   Sprite: {fileID: 144808378, guid: 540fbd7016b8a9e4ca047b1751f54588, type: 3}

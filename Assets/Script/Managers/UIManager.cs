@@ -18,6 +18,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject nodeUiPanel;
     [SerializeField] private GameObject achievementPanel;
 
+    [Header("Buttom")]
+    [SerializeField] private GameObject SpeedButton;
+    private TextMeshProUGUI speedText;
+    [SerializeField] private GameObject StartButton;
+
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI upgradeText;
     [SerializeField] private TextMeshProUGUI sellText;
@@ -70,7 +75,45 @@ public class UIManager : MonoBehaviour
         _currentSelectedNode.Turret = null;
         CloseNodeUiPanel();
     }
+    public void SpeedButtonClickEvent()
+    {
+        switch (Time.timeScale)
+        {
+            case 0:
+                Time.timeScale = 1;
+                speedText.text = "X1";
+                break;
+            case 1:
+                Time.timeScale = 2;
+                speedText.text = "X2";
+                break;
+            case 2:
+                Time.timeScale = 1;
+                speedText.text = "X1";
+                break;
+            default:
+                break;
+        }
+    }
+    public void StopButtonClickEvent()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            speedText.text = "X1";
+        }
+        else
+        {
+            Time.timeScale = 0;
+            speedText.text = "0";
+        }
+    }
     #endregion
+
+    private void Start()
+    {
+        speedText = SpeedButton.GetComponentInChildren<TextMeshProUGUI>();
+    }
 
     private void NodeSelected(Node selectedNode)
     {
