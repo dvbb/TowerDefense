@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject turretShopPanel;
     [SerializeField] private GameObject nodeUiPanel;
+    [SerializeField] private GameObject achievementPanel;
 
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI upgradeText;
@@ -27,6 +28,12 @@ public class UIManager : MonoBehaviour
 
     private int _wave = 1;
     private Node _currentSelectedNode;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+            ShowAchievementPanel();
+    }
 
     #region Show/Close ui
     public void CloseTurretShopPanel()
@@ -41,6 +48,13 @@ public class UIManager : MonoBehaviour
     public void CloseNodeUiPanel()
     {
         nodeUiPanel.SetActive(false);
+    }
+    public void ShowAchievementPanel()
+    {
+        if (achievementPanel.active)
+            achievementPanel.SetActive(false);
+        else
+            achievementPanel.SetActive(true);
     }
     #endregion
 
@@ -60,7 +74,6 @@ public class UIManager : MonoBehaviour
 
     private void NodeSelected(Node selectedNode)
     {
-        Debug.Log(_currentSelectedNode?.Turret?.name);
         _currentSelectedNode = selectedNode;
         if (_currentSelectedNode.IsEmpty())
         {
