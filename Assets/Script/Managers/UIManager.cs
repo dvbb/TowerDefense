@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
     }
     public void ShowAchievementPanel()
     {
-        if (achievementPanel.active)
+        if (achievementPanel.activeInHierarchy)
             achievementPanel.SetActive(false);
         else
             achievementPanel.SetActive(true);
@@ -142,7 +142,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth() => Health.text = LevelManager.instance.lives.ToString();
     public void UpdateWaves() => Waves.text = $"Wave {++_wave}";
-
+    public void ResetSpeed()
+    {
+        Time.timeScale = 1;
+        speedText.text = "X1";
+    }
 
     private void OnEnable()
     {
