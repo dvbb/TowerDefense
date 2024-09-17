@@ -1,11 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class EnemyHurtState : EnemyState
+﻿public class EnemyHurtState : EnemyState
 {
     public EnemyHurtState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {

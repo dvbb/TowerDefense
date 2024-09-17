@@ -31,8 +31,6 @@ public class MySceneManager : MonoBehaviour
         if (!isDebug)
         {
             Scene scene = SceneManager.GetActiveScene();
-            Debug.Log("active: " + scene.name);
-            Debug.Log("sceneCount: " + SceneManager.sceneCount);
         }
     }
 
@@ -59,4 +57,5 @@ public class MySceneManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(Scenes.EscScene.ToString());
     }
     public void ToLevel1() => SceneManager.LoadScene("Level_1");
+    public void QuitGame() => Application.Quit();
 }
