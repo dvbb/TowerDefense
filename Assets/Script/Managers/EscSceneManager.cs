@@ -26,10 +26,10 @@ public class EscSceneManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-#if DEBUG
-        Carema.SetActive(true);
-        EventSystem.SetActive(true);
-#endif
+//#if DEBUG
+//        Carema.SetActive(true);
+//        EventSystem.SetActive(true);
+//#endif
     }
 
     public void OpenSettingPanel()
@@ -55,14 +55,18 @@ public class EscSceneManager : MonoBehaviour
                 break;
             case 1:
                 SaveResolutionRadio(1);
-                Screen.SetResolution(1280, 1024, false);
+                Screen.SetResolution(1680, 1024, false);
                 break;
             case 2:
                 SaveResolutionRadio(2);
-                Screen.SetResolution(1024, 768, false);
+                Screen.SetResolution(1280, 1024, false);
                 break;
             case 3:
                 SaveResolutionRadio(3);
+                Screen.SetResolution(1024, 768, false);
+                break;
+            case 4:
+                SaveResolutionRadio(4);
                 Screen.SetResolution(800, 600, false);
                 break;
             default:

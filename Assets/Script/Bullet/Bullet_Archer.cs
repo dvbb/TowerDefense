@@ -12,4 +12,10 @@ public class Bullet_Archer : Bullet
     {
         base.Update();
     }
+
+    protected override void HitTarget()
+    {
+        base.HitTarget();
+        AudioManager.Instance.EnemyHitted(SEs.bow);
+    }
 }
