@@ -57,7 +57,16 @@ public class MySceneManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(Scenes.EscScene.ToString());
     }
     public void ToMap() => SceneManager.LoadScene("Map");
-    public void ToLevel1() => SceneManager.LoadScene("Level_1");
-    public void ToLevel2() => SceneManager.LoadScene("Level_2");
+    public void ToLevel1()
+    {
+        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene("BattleAreaUI", LoadSceneMode.Additive);
+
+    }
+    public void ToLevel2()
+    {
+        SceneManager.LoadScene("Level_2");
+        SceneManager.LoadScene("BattleAreaUI", LoadSceneMode.Additive);
+    }
     public void QuitGame() => Application.Quit();
 }

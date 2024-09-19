@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour
     {
         Debug.Log("next wave");
         yield return new WaitForSeconds(delayBtwWaves);
-        UIManager.Instance.UpdateWaves();
+        BattleAreaUIManager.Instance.UpdateWaves();
         _enemiesRemaining = enemyCount;
         _spawnTimer = 0;
         _enemiesSpawned = 0;

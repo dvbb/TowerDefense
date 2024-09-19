@@ -16,6 +16,7 @@ public class BgmManager : MonoBehaviour
         else
             Destroy(gameObject);
         bgmPlayer = GetComponent<AudioSource>();
+        bgmPlayer.volume = LoadBgmValue();
         DontDestroyOnLoad(this.gameObject);
     }
 

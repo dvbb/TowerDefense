@@ -19,13 +19,13 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         lives = totalLives;
-        UIManager.Instance.UpdateHealth();
+        BattleAreaUIManager.Instance.UpdateHealth();
     }
 
     private void ReduceLives()
     {
         lives--;
-        UIManager.Instance.UpdateHealth();
+        BattleAreaUIManager.Instance.UpdateHealth();
         if (lives <= 0)
         {
             Debug.Log("Game over");

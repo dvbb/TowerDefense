@@ -25,6 +25,7 @@ public class SeManager : MonoBehaviour
         else
             Destroy(gameObject);
         audioPlayer = GetComponent<AudioSource>();
+        audioPlayer.volume = LoadSeValue();
         DontDestroyOnLoad(this.gameObject);
     }
 
