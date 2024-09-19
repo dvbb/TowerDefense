@@ -763,7 +763,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1867778731}
         m_TargetAssemblyTypeName: MySceneManager, Assembly-CSharp
-        m_MethodName: ToLevel1
+        m_MethodName: ToMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -56,6 +56,8 @@ public class MySceneManager : MonoBehaviour
         UIManager.Instance.ResetSpeed();
         SceneManager.UnloadSceneAsync(Scenes.EscScene.ToString());
     }
+    public void ToMap() => SceneManager.LoadScene("Map");
     public void ToLevel1() => SceneManager.LoadScene("Level_1");
+    public void ToLevel2() => SceneManager.LoadScene("Level_2");
     public void QuitGame() => Application.Quit();
 }
