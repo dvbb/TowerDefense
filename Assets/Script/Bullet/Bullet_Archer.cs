@@ -16,6 +16,6 @@ public class Bullet_Archer : Bullet
     protected override void HitTarget()
     {
         base.HitTarget();
-        AudioManager.Instance.EnemyHitted(SEs.bow);
+        SeManager.Instance.EnemyHitted(SEs.bow);
     }
 }

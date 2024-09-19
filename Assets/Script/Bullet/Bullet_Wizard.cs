@@ -16,6 +16,6 @@ public class Bullet_Wizard : Bullet
     {
         base.HitTarget();
         Target.EnableSlowStats();
-        AudioManager.Instance.EnemyHitted(SEs.magic);
+        SeManager.Instance.EnemyHitted(SEs.magic);
     }
 }

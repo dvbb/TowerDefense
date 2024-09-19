@@ -19,6 +19,8 @@ public class EscSceneManager : MonoBehaviour
     [SerializeField] private GameObject SettingPanel;
 
     [SerializeField] private TMP_Dropdown ResolutionDropdown;
+    [SerializeField] private Slider BgmSlider;
+    [SerializeField] private Slider SeSlider;
 
     private string RESOLUTION_SAVE_KEY = "MYGAME_RESOLUTION_RADIO";
 
@@ -26,10 +28,10 @@ public class EscSceneManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-//#if DEBUG
-//        Carema.SetActive(true);
-//        EventSystem.SetActive(true);
-//#endif
+        //#if DEBUG
+        //        Carema.SetActive(true);
+        //        EventSystem.SetActive(true);
+        //#endif
     }
 
     public void OpenSettingPanel()
@@ -37,6 +39,8 @@ public class EscSceneManager : MonoBehaviour
         EscPanel.SetActive(false);
         SettingPanel.SetActive(true);
         ResolutionDropdown.value = PlayerPrefs.GetInt(RESOLUTION_SAVE_KEY);
+        BgmSlider.value = BgmManager.Instance.LoadBgmValue();
+        SeSlider.value = SeManager.Instance.LoadSeValue();
     }
 
     public void SettingToEsc()
@@ -78,5 +82,15 @@ public class EscSceneManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(RESOLUTION_SAVE_KEY, index);
         PlayerPrefs.Save();
+    }
+
+    public void OnBgmSliderValueChanged()
+    {
+        BgmManager.Instance.SaveBgmValue(BgmSlider.value);
+    }
+
+    public void OnSeSliderValueChanged()
+    {
+        SeManager.Instance.SaveSeValue(SeSlider.value);
     }
 }
