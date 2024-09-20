@@ -10,14 +10,11 @@ public class EscSceneManager : MonoBehaviour
 {
     private EscSceneManager Instance;
 
-    [Header("Components")]
-    [SerializeField] private GameObject Carema;
-    [SerializeField] private GameObject EventSystem;
-
     [Header("Panels")]
     [SerializeField] private GameObject EscPanel;
     [SerializeField] private GameObject SettingPanel;
 
+    [Header("UI_Components")]
     [SerializeField] private TMP_Dropdown ResolutionDropdown;
     [SerializeField] private Slider BgmSlider;
     [SerializeField] private Slider SeSlider;
@@ -28,13 +25,19 @@ public class EscSceneManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-        //#if DEBUG
-        //        Carema.SetActive(true);
-        //        EventSystem.SetActive(true);
-        //#endif
+    }
+    private void SaveResolutionRadio(int index)
+    {
+        PlayerPrefs.SetInt(RESOLUTION_SAVE_KEY, index);
+        PlayerPrefs.Save();
     }
 
-    public void OpenSettingPanel()
+
+    #region Button Clicked
+
+    public void OnContinueButtonClicked() => MySceneManager.Instance.UnloadEsc();
+    
+    public void OnSettingButtonClicked()
     {
         EscPanel.SetActive(false);
         SettingPanel.SetActive(true);
@@ -43,13 +46,19 @@ public class EscSceneManager : MonoBehaviour
         SeSlider.value = SeManager.Instance.LoadSeValue();
     }
 
-    public void SettingToEsc()
+    public void OnSettingBackButtonClicked()
     {
         SettingPanel.SetActive(false);
         EscPanel.SetActive(true);
     }
 
-    public void ChangeResolutionRadio()
+    public void OnBackToTitleButtonClicked() => MySceneManager.Instance.ToStartScene();
+    public void OnEndGameButtonClicked() => MySceneManager.Instance.QuitGame();
+
+    #endregion
+
+    #region ValueChanged
+    public void OnResolutionRadioChanged()
     {
         switch (ResolutionDropdown.value)
         {
@@ -78,12 +87,6 @@ public class EscSceneManager : MonoBehaviour
         }
     }
 
-    private void SaveResolutionRadio(int index)
-    {
-        PlayerPrefs.SetInt(RESOLUTION_SAVE_KEY, index);
-        PlayerPrefs.Save();
-    }
-
     public void OnBgmSliderValueChanged()
     {
         BgmManager.Instance.SaveBgmValue(BgmSlider.value);
@@ -93,4 +96,6 @@ public class EscSceneManager : MonoBehaviour
     {
         SeManager.Instance.SaveSeValue(SeSlider.value);
     }
+    #endregion
+
 }

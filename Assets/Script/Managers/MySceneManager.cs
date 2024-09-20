@@ -9,7 +9,7 @@ enum Scenes
 
 public class MySceneManager : MonoBehaviour
 {
-    private MySceneManager Instance;
+    public static MySceneManager Instance;
 
     [SerializeField] private bool isDebug;
 
