@@ -8,25 +8,19 @@ public enum SEs
     magic
 }
 
-public class SeManager : MonoBehaviour
+public class SeManager : UnitySingleton<SeManager>
 {
-    public static SeManager Instance;
-
     [SerializeField] private AudioClip se_bow_hit;
     [SerializeField] private AudioClip se_magic_hit;
 
     private AudioSource audioPlayer;
     private string SE_VOLUME_SAVE_KEY = "SE_VOLUME";
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        base.Awake();
         audioPlayer = GetComponent<AudioSource>();
         audioPlayer.volume = LoadSeValue();
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()

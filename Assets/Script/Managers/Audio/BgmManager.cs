@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BgmManager : MonoBehaviour
+public class BgmManager : UnitySingleton<BgmManager>
 {
-    public static BgmManager Instance;
-
     private AudioSource bgmPlayer;
     private string BGM_VOLUME_SAVE_KEY = "BGM_VOLUME";
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        base.Awake();
         bgmPlayer = GetComponent<AudioSource>();
         bgmPlayer.volume = LoadBgmValue();
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
