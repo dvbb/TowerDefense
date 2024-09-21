@@ -53,7 +53,7 @@ public class MySceneManager : MonoBehaviour
     }
     public void UnloadEsc()
     {
-        UIManager.Instance.ResetSpeed();
+        LagacyUIManager.Instance?.ResetSpeed();
         SceneManager.UnloadSceneAsync(Scenes.EscScene.ToString());
     }
     public void ToMap() => SceneManager.LoadScene("Map");

@@ -42,7 +42,7 @@ public class TurretShopManager : MonoBehaviour
             Turret turretPlaced = turretInstance.GetComponent<Turret>();
             _currentSelectedNode.SetTurret(turretPlaced);
 
-            UIManager.Instance.CloseTurretShopPanel();
+            LagacyUIManager.Instance.CloseTurretShopPanel();
         }
     }
 

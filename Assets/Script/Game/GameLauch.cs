@@ -12,6 +12,7 @@ public class GameLauch : UnitySingleton<GameLauch>
 
         // Add new Components
         this.gameObject.AddComponent<GameApp>();
+        this.gameObject.AddComponent<UIManager>();
     }
 
     private void Start()
