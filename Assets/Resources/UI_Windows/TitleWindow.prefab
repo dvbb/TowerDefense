@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 625704142575292881}
   - component: {fileID: 1095669489572970368}
   m_Layer: 5
-  m_Name: Canva_Start
+  m_Name: TitleWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

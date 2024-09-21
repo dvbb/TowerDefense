@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class UIBase : MonoBehaviour
 {
+    public UIEventTrigger Register(string name)
+    {
+        Transform tf = transform.Find(name);
+        Debug.Log(tf.gameObject.name);
+        Debug.Log(tf.position);
+        return UIEventTrigger.Get(tf.gameObject);
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);

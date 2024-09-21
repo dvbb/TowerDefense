@@ -14,8 +14,8 @@ public class GameApp : UnitySingleton<GameApp>
 
     public void EnterGameScene()
     {
-        // add game map
-        UIManager.Instance.ShowUI<Canva_Start>("Canva_Start");
+        // Enter title window
+        UIManager.Instance.ShowUI<TitleWindow>("TitleWindow");
 
         // add player
 
