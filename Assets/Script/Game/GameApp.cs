@@ -14,6 +14,9 @@ public class GameApp : UnitySingleton<GameApp>
 
     public void EnterGameScene()
     {
+        // Play BGM
+        BgmManager.Instance.PlayBgm("TestBGM");
+
         // Enter title window
         UIManager.Instance.ShowUI<TitleWindow>("TitleWindow");
 

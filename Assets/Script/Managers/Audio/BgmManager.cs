@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class BgmManager : UnitySingleton<BgmManager>
 {
-    private AudioSource bgmPlayer;
+    private AudioSource audioPlayer;
     private string BGM_VOLUME_SAVE_KEY = "BGM_VOLUME";
 
     protected override void Awake()
     {
         base.Awake();
-        bgmPlayer = GetComponent<AudioSource>();
-        bgmPlayer.volume = LoadBgmValue();
+        audioPlayer = GetComponent<AudioSource>();
+        audioPlayer.volume = LoadBgmValue();
     }
 
     private void Update()
     {
     }
 
+    public void PlayBgm(string name, bool isLoop = true)
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Audio/BGM/" + name);
+        audioPlayer.clip = clip;
+        audioPlayer.loop = isLoop;
+        audioPlayer.Play();
+    }
+
     public void SaveBgmValue(float value)
     {
-        bgmPlayer.volume = value;
+        audioPlayer.volume = value;
         PlayerPrefs.SetFloat(BGM_VOLUME_SAVE_KEY, value);
     }
 

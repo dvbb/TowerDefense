@@ -10,8 +10,8 @@ public enum SEs
 
 public class SeManager : UnitySingleton<SeManager>
 {
-    [SerializeField] private AudioClip se_bow_hit;
-    [SerializeField] private AudioClip se_magic_hit;
+    private AudioClip se_bow_hit;
+    private AudioClip se_magic_hit;
 
     private AudioSource audioPlayer;
     private string SE_VOLUME_SAVE_KEY = "SE_VOLUME";
@@ -21,6 +21,13 @@ public class SeManager : UnitySingleton<SeManager>
         base.Awake();
         audioPlayer = GetComponent<AudioSource>();
         audioPlayer.volume = LoadSeValue();
+        InitSEs();
+    }
+
+    private void InitSEs()
+    {
+        se_bow_hit = Resources.Load<AudioClip>("/Audio/SEs/bow_hit");
+        se_magic_hit = Resources.Load<AudioClip>("/Audio/SEs/Magic_Hit");
     }
 
     private void Update()
@@ -36,6 +43,13 @@ public class SeManager : UnitySingleton<SeManager>
     public float LoadSeValue()
     {
         return PlayerPrefs.GetFloat(SE_VOLUME_SAVE_KEY);
+    }
+
+    public void PlayEffect(string name, bool isLoop = false)
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Audio/EFs/" + name);
+        //audioSource.PlayOneShot(clip);
+        AudioSource.PlayClipAtPoint(clip, transform.position);
     }
 
     public void EnemyHitted(SEs ses)
