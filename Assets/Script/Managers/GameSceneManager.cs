@@ -27,9 +27,9 @@ public class GameSceneManager : UnitySingleton<GameSceneManager>
             if (SceneManager.GetSceneAt(i).name != "StartScene")
             {
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
-                Debug.Log(SceneManager.GetSceneAt(i).name);
             }
         }
+        UIManager.Instance.HideUI<EscWindow>();
         UIManager.Instance.HideUI<TitleWindow>();
         UIManager.Instance.ShowUI<TitleWindow>();
     }

@@ -105,7 +105,6 @@ public class Enemy : MonoBehaviour
     public virtual void Die()
     {
         ObjectPooler.ReturnToPool(gameObject);
-        Debug.Log("die");
         if (OnDeadBeforeReached != null)
         {
             OnDeadBeforeReached.Invoke();
