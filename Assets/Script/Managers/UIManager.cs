@@ -82,7 +82,7 @@ public class UIManager : UnitySingleton<UIManager>
         ui?.Hide();
     }
 
-    public void HideUI<T>() where T: UIBase
+    public void HideUI<T>() where T : UIBase
     {
         UIBase ui = Find(typeof(T).Name);
         ui?.Hide();
@@ -97,8 +97,7 @@ public class UIManager : UnitySingleton<UIManager>
             Destroy(ui.gameObject);
         }
     }
-
-    public void CloseUI<T>() where T: UIBase
+    public void CloseUI<T>() where T : UIBase
     {
         UIBase ui = Find(typeof(T).Name);
         if (ui != null)
@@ -116,7 +115,7 @@ public class UIManager : UnitySingleton<UIManager>
         }
         uiList.Clear();
     }
-    
+
     public UIBase Find(string uiName)
     {
         for (int i = 0; i < uiList.Count; i++)
@@ -134,5 +133,18 @@ public class UIManager : UnitySingleton<UIManager>
                 return uiList[i];
         }
         return null;
+    }
+
+    public T FindUIWindowComponent<T>(UIBase window) where T : UnityEngine.Object
+    {
+        T component = default(T);
+        component = window.GetComponent<T>();
+        return component;
+    }
+    public T FindUIWindowComponentInChildren<T>(UIBase window) where T : UnityEngine.Object
+    {
+        T component = default(T);
+        component = window.GetComponentInChildren<T>();
+        return component;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,13 +19,25 @@ public class CardItem : MonoBehaviour
 
     private void Awake()
     {
-        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         button = GetComponentInChildren<Button>();
+        textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
     {
         button.GetComponent<Image>().sprite = Resources.Load<Sprite>(imgPath);
         textMeshPro.text = cost.ToString();
+    }
+
+    private void CardSelected()
+    {
+        var CardShowWindow = UIManager.Instance.ShowUI<CardShowWindow>();
+        Image image = UIManager.Instance.FindUIWindowComponentInChildren<Image>(CardShowWindow);
+        image.sprite = Resources.Load<Sprite>(imgPath);
+    }
+
+    private void OnEnable()
+    {
+        button.onClick.AddListener(CardSelected);
     }
 }
