@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class UIManager : UnitySingleton<UIManager>
 {
-    private Transform canvasTransform;
+    //private Transform canvasTransform;
     private List<UIBase> uiList;
 
     protected override void Awake()
     {
         base.Awake();
-        canvasTransform = GameObject.Find("Canvas").transform;
+        //canvasTransform = GameObject.Find("Canvas").transform;
         uiList = new List<UIBase>();
     }
 
