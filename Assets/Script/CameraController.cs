@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : UnitySingleton<CameraController>
 {
     [Header("Camera move info")]
     [SerializeField] private Transform cameraPosition;
@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 minPosition;
     [SerializeField] private Vector2 maxPosition;
 
+    public void InitMoveDistance(Vector2 minPosition, Vector2 maxPosition)
+    {
+        this.minPosition = minPosition;
+        this.maxPosition = maxPosition;
+    }
 
     private void Update()
     {

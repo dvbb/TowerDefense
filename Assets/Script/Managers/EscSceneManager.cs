@@ -35,8 +35,12 @@ public class EscSceneManager : MonoBehaviour
 
     #region Button Clicked
 
-    public void OnContinueButtonClicked() => MySceneManager.Instance.UnloadEsc();
-    
+    public void OnContinueButtonClicked()
+    {
+        Time.timeScale = 1f;
+        UIManager.Instance.HideUI("EscWindow");
+    }
+
     public void OnSettingButtonClicked()
     {
         EscPanel.SetActive(false);
@@ -52,8 +56,8 @@ public class EscSceneManager : MonoBehaviour
         EscPanel.SetActive(true);
     }
 
-    public void OnBackToTitleButtonClicked() => MySceneManager.Instance.ToStartScene();
-    public void OnEndGameButtonClicked() => MySceneManager.Instance.QuitGame();
+    public void OnBackToTitleButtonClicked() => GameSceneManager.Instance.ToStartScene();
+    public void OnEndGameButtonClicked() => GameSceneManager.Instance.QuitGame();
 
     #endregion
 

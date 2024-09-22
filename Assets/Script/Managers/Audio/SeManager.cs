@@ -26,8 +26,8 @@ public class SeManager : UnitySingleton<SeManager>
 
     private void InitSEs()
     {
-        se_bow_hit = Resources.Load<AudioClip>("/Audio/SEs/bow_hit");
-        se_magic_hit = Resources.Load<AudioClip>("/Audio/SEs/Magic_Hit");
+        se_bow_hit = Resources.Load<AudioClip>("Audio/SEs/bow_hit");
+        se_magic_hit = Resources.Load<AudioClip>("Audio/SEs/Magic_Hit");
     }
 
     private void Update()

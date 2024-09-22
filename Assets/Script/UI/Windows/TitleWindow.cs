@@ -15,9 +15,10 @@ public class TitleWindow : UIBase
         Register("Buttons_Panel/End").onClick = onEndGameBtn;
     }
 
-    private void onStartGameBtn(GameObject obj,PointerEventData pdata)
+    private void onStartGameBtn(GameObject obj, PointerEventData pdata)
     {
-        Close();
+        UIManager.Instance.HideUI("TitleWindow");
+        UIManager.Instance.ShowUI<ForestMapWindow>("ForestMapWindow");
     }
 
     private void onContinueGameBtn(GameObject obj, PointerEventData pdata)

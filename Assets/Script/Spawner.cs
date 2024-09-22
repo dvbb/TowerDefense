@@ -44,7 +44,6 @@ public class Spawner : MonoBehaviour
         if (_spawnTimer < 0)
         {
             _spawnTimer = GetSpawnDelay();
-            Debug.Log("2  ");
             if (_enemiesSpawned < enemyCount)
             {
                 SpawnEnemy();
