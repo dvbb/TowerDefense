@@ -14,6 +14,15 @@ public class CardManager : UnitySingleton<CardManager>
         CardItemPrefab = Resources.Load("Card/CardItem") as GameObject;
     }
 
+    private void Update()
+    {
+        // Drag card
+        if (CurrentSelectedCard != null && CurrentSelectedCard.isDragging)
+        {
+            Debug.Log("xx");
+        }
+    }
+
     public void Init(RectTransform content)
     {
         CardContent = content;
@@ -30,6 +39,7 @@ public class CardManager : UnitySingleton<CardManager>
             card.atk = Random.Range(100, 200);
             card.aspd = Random.Range(50, 100);
             card.atkType = Random.Range(0, 100) > 50 ? "物理" : "魔法";
+            card.prefabPath = "Turrets/archer_level_1";
         }
     }
 
@@ -38,5 +48,12 @@ public class CardManager : UnitySingleton<CardManager>
         CurrentSelectedCard?.DisEnableSelcted();
         newCard.EnableSelcted();
         CurrentSelectedCard = newCard;
+    }
+
+    public void UnSelecteCard()
+    {
+        CurrentSelectedCard?.DisEnableSelcted();
+        CurrentSelectedCard = null;
+        UIManager.Instance.HideUI<CardShowWindow>();
     }
 }

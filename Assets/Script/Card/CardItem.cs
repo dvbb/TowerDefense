@@ -4,19 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardItem : MonoBehaviour
+public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("Card info")]
-    public string imgPath;
     public string name;
     public int cost;
     public int atk;
     public int aspd;
     public string atkType;
+
+    [Header("Resources")]
+    public string imgPath;
+    public string prefabPath;
+
+    public bool isDragging;
+    public Vector3 mousePosition;
 
     #region Components
     private Button button;
@@ -43,18 +51,8 @@ public class CardItem : MonoBehaviour
         textMeshPro.text = cost.ToString();
     }
 
-    private void CardSelected()
-    {
-        if (CardManager.Instance.CurrentSelectedCard != this)
-        {
-            Debug.Log("selecte a card, use CardManager.Instance");
-            CardManager.Instance.ChangeSelectedCard(this);
-        }
-    }
-
     public void EnableSelcted()
     {
-        Debug.Log("before change:" + rectTransform.transform.position);
         rectTransform.transform.position = rectTransform.transform.position + new Vector3(0, 20, 0);
         var CardShowWindow = UIManager.Instance.ShowUI<CardShowWindow>();
         SelectedCard selectedCard = UIManager.Instance.FindUIWindowComponentInChildren<SelectedCard>(CardShowWindow);
@@ -68,6 +66,55 @@ public class CardItem : MonoBehaviour
 
     private void OnEnable()
     {
-        button.onClick.AddListener(CardSelected);
+        button.onClick.AddListener(OnMouseDown);
+        button.onClick.AddListener(OnMouseUp);
+    }
+
+    private void OnMouseDown()
+    {
+        isDragging = true;
+        mousePosition = Input.mousePosition;
+        Debug.Log(Input.mousePosition);
+    }
+
+    private void OnMouseUp()
+    {
+        isDragging = false;
+        Debug.Log(Input.mousePosition);
+        if (Input.mousePosition == mousePosition)
+        {
+            CardSelected();
+        }
+        else
+        {
+            Debug.Log("xx");
+            Instantiate(Resources.Load(prefabPath));
+        }
+    }
+
+    private void CardSelected()
+    {
+        if (CardManager.Instance.CurrentSelectedCard == this)
+        {
+            CardManager.Instance.UnSelecteCard();
+        }
+        else
+        {
+            CardManager.Instance.ChangeSelectedCard(this);
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
     }
 }
