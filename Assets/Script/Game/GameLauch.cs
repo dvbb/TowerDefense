@@ -21,6 +21,9 @@ public class GameLauch : UnitySingleton<GameLauch>
         // 1.2 Audio
         this.gameObject.AddComponent<AudioSource>();
         this.gameObject.AddComponent<BgmManager>();
+
+        // 1.3 Card
+        this.gameObject.AddComponent<CardManager>();
     }
 
     private void Start()

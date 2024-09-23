@@ -10,12 +10,6 @@ public class CardShowWindow : UIBase
 {
     private void Awake()
     {
-        Image image  = GetComponentInChildren<Image>();
-        Debug.Log(image);
-        Debug.Log(image.sprite);
-    }
 
-    public void Init(string imgPath)
-    {
     }
 }

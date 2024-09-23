@@ -18,9 +18,11 @@ public class GameApp : UnitySingleton<GameApp>
         BgmManager.Instance.PlayBgm("TestBGM");
 
         // Enter title window
-        UIManager.Instance.ShowUI<TitleWindow>("TitleWindow");
+        UIManager.Instance.ShowUI<TitleWindow>();
+        UIManager.Instance.ShowUI<CardTableWindow>();
 
         // add player
+
 
         // add ui
     }
