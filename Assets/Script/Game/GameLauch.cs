@@ -24,6 +24,9 @@ public class GameLauch : UnitySingleton<GameLauch>
 
         // 1.3 Card
         this.gameObject.AddComponent<CardManager>();
+
+        // 1.4 Data Persistency
+        this.gameObject.AddComponent<CurrencySystem>();
     }
 
     private void Start()

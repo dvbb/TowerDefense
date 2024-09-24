@@ -19,9 +19,7 @@ public class CurrencySystem : MonoBehaviour
 
     private void Start()
     {
-        AddCoins(cofloatest);
         LoadCoins();
-        BattleAreaUIManager.Instance.UpdateTotalCoins(TotalCoins);
     }
 
     private void LoadCoins()

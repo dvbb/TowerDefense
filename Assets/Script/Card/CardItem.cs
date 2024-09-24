@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -22,9 +23,9 @@ public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [Header("Resources")]
     public string imgPath;
     public string prefabPath;
+    public GameObject turret;
 
     public bool isDragging;
-    public Vector3 mousePosition;
 
     #region Components
     private Button button;
@@ -51,6 +52,11 @@ public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         textMeshPro.text = cost.ToString();
     }
 
+    private void Update()
+    {
+
+    }
+
     public void EnableSelcted()
     {
         rectTransform.transform.position = rectTransform.transform.position + new Vector3(0, 20, 0);
@@ -66,30 +72,7 @@ public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void OnEnable()
     {
-        button.onClick.AddListener(OnMouseDown);
-        button.onClick.AddListener(OnMouseUp);
-    }
-
-    private void OnMouseDown()
-    {
-        isDragging = true;
-        mousePosition = Input.mousePosition;
-        Debug.Log(Input.mousePosition);
-    }
-
-    private void OnMouseUp()
-    {
-        isDragging = false;
-        Debug.Log(Input.mousePosition);
-        if (Input.mousePosition == mousePosition)
-        {
-            CardSelected();
-        }
-        else
-        {
-            Debug.Log("xx");
-            Instantiate(Resources.Load(prefabPath));
-        }
+        button.onClick.AddListener(CardSelected);
     }
 
     private void CardSelected()
@@ -106,15 +89,35 @@ public class CardItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        CardManager.Instance.ChangeSelectedCard(this);
+        isDragging = true;
+        turret = Instantiate(Resources.Load(prefabPath) as GameObject);
     }
     public void OnDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        //Vector2 pos;
+        //if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        //    transform.parent.GetComponent<RectTransform>(),
+        //    eventData.position,
+        //    eventData.pressEventCamera,
+        //    out pos
+        //    ))
+        //{
+        //    transform.GetComponent<RectTransform>().anchoredPosition = pos;
+        //}
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        isDragging = false;
+        CardManager.Instance.CancelSelecteCard();
+        Destroy(gameObject);
+    }
+
+    public void StopPlaceTurret()
+    {
+        isDragging = false;
+        Destroy(turret);
+        turret = null;
     }
 }

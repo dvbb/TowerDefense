@@ -11,6 +11,7 @@ public class BattleAreaUIManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+        CurrencySystem.instance.AddCoins(500);
     }
 
     [Header("Buttom")]
